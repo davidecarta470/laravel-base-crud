@@ -1,5 +1,5 @@
 <footer>
   <h1 class="text-center py-5">
-    SUPER EROI FOOTER
+    FOOTER
   </h1>
 </footer>

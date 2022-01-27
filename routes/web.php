@@ -13,5 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'SerieController@index')->name('series');
+Route::get('/', 'PageController@index')->name('home');
+Route::get('/contacts', 'PageController@contacts')->name('contacts');
 Route::resource('series','SerieController');
