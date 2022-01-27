@@ -14,8 +14,8 @@ class SerieController extends Controller
      */
     public function index()
     {
-        $series = Serie::all();
-        return view('home',compact('series'));
+        $series = Serie::paginate(5);
+        return view('series',compact('series'));
     }
 
     /**
@@ -45,9 +45,10 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function show(Serie $serie)
+    public function show(Serie $series)
     {
-        //
+       $item = Serie::find($series->id);
+       return view('show',compact('item'));
     }
 
     /**
