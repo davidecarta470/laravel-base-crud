@@ -16,12 +16,13 @@ class SerieCreateTable extends Seeder
        foreach(config('comics') as $item){
            $new_serie = new Serie();
            $new_serie->title = $item['title'];
+           $new_serie->slug = Str::slug($new_serie->title ,'-');
            $new_serie->img = $item['thumb'];
+           $new_serie->description = $item['description'];
            $new_serie->price = $item['price'];
            $new_serie->series = $item['series'];
            $new_serie->sale_date = $item['sale_date'];
            $new_serie->type = $item['type'];
-           $new_serie->slug = Str::slug($new_serie->title,'-');
            $new_serie->save();
            
        }

@@ -17,6 +17,7 @@ class CreateSeriesTable extends Migration
             $table->id();
             $table->string('title',50);
             $table->string('img',200);
+            $table->text('description',2000);
             $table->string('price',40);
             $table->string('series',40);
             $table->string('sale_date',40);

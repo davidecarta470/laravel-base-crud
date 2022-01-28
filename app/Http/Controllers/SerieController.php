@@ -15,7 +15,7 @@ class SerieController extends Controller
     public function index()
     {
         $series = Serie::paginate(5);
-        return view('series.home',compact('series'));
+        return view('series.index',compact('series'));
     }
 
     /**
@@ -25,7 +25,7 @@ class SerieController extends Controller
      */
     public function create()
     {
-        //
+        return view('series.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class SerieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $new_serie = new Serie();
+        // $new_serie->title = $data['title'];
+        // $new_serie->img = $data['thumb'];
+        // $new_serie->description = $data['description'];
+        // $new_serie->price = $data['price'];
+        // $new_serie->series = $data['series'];
+        // $new_serie->sale_date = $data['sale_date'];
+        // $new_serie->type = $data['type'];
+        // $new_serie->save();
+        $new_serie->fill($data);
+        $new_serie->save();
+        return redirect('series.index',$new_serie);
     }
 
     /**
