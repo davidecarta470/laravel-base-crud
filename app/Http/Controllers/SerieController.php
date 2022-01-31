@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Serie;
 use Illuminate\Http\Request;
-use App\Http\Requests\MyRequest;
+use App\Http\Requests\MyFormRequest;
 
 class SerieController extends Controller
 {
@@ -36,7 +36,7 @@ class SerieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MyRequest $request)
+    public function store(MyFormRequest $request)
     {
         
         
@@ -100,7 +100,7 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function update(MyRequest $request, Serie $series)
+    public function update(MyFormRequest $request, Serie $series)
     {
        
         $data = $request->all();
