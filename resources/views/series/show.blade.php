@@ -7,13 +7,12 @@
     <div class="col-3"><img style="width:100%" src="{{asset($series->img)}}" alt=""></div>
     
     <div class="col-6">
-      <h3 >{{$series->series}}</h3>
-      <p >{{$series->description}}</p>
-      <h3 >{{$series->price}} euro</h3>
+      <h3>{{$series->series}}</h3>
+      <p>{{$series->description}}</p>
+      <h3>{{$series->price}} euro</h3>
     </div>
     <div class="col-1">
       <a href="{{ route('series.edit', $series) }}" class="btn btn-primary">EDIT</a>
-      <button href=""class="btn btn-danger"style="width:100%">delete</button>
     </div>
   </div>
   <h3 style="margin-left:80%"><a href="{{route('series.index')}}"> < < back</a></div>

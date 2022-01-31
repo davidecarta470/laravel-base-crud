@@ -22,7 +22,7 @@
 
            
 
-            <form style="display: inline-block" action="{{route('series.destroy',$serie)}}" method="POST">
+            <form onsubmit='return confirm("Confermare eliminazione di {{$serie->title}}")' style="display: inline-block" action="{{route('series.destroy',$serie)}}" method="POST">
                @csrf
                @method('DELETE')
                <button type="submit" class="btn btn-danger">delete</button>

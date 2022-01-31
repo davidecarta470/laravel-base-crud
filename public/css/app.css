@@ -13045,3 +13045,7 @@ h3 {
   overflow: visible;
   clip: auto;
 }
+
+.form_errors {
+  color: red;
+}

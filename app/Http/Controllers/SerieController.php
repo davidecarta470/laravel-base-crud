@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Serie;
 use Illuminate\Http\Request;
+use App\Http\Requests\MyRequest;
 
 class SerieController extends Controller
 {
@@ -35,18 +36,24 @@ class SerieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MyRequest $request)
     {
-        $request->validate([
-            'title'=>"required|max:200|min:2",
+        
+        
+        // $request->validate($this->validateField()['field'],$this->validateField()['sentence']
+        // [
+        //     'title'=>"required|max:50|min:2",
+        //     'price'=>"required|min:2",
 
-        ],
-        [
-            'title.required'=>'il titolo è un campo obbligatorio',
-            'title.max'=>'il numero di caratteri consentito è di :max caratteri',
-            'title.min'=>'il numero minimo di caratteri è di :min caratteru '
-        ]
-    );
+        // ],
+        // [
+        //     'title.required'=>'il titolo è un campo obbligatorio',
+        //     'title.max'=>'il numero di caratteri consentito è di :max caratteri',
+        //     'title.min'=>'il numero minimo di caratteri è di :min caratteri',
+        //     'price.required'=>'il titolo è un campo obbligatorio',
+        //     'price.min'=>'il numero minimo di caratteri è di :min caratteri'
+        // ]
+    // );
         $data = $request->all();
         $new_serie = new Serie();
         // $new_serie->title = $data['title'];
@@ -93,8 +100,9 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Serie $series)
+    public function update(MyRequest $request, Serie $series)
     {
+       
         $data = $request->all();
         $series->update($data);
         return redirect()->route('series.index');
@@ -110,5 +118,21 @@ class SerieController extends Controller
     {
         $series->delete();
         return redirect()->route('series.index')->with('deleted',"il fumetto $series->title è stato eliminato");
+    }
+
+
+    private function validateField(){
+        return [
+            "field"=>['title'=>"required|max:50|min:2",
+                      'price'=>"required|min:2"],
+            "sentence"=>[      
+                        'title.required'=>'il titolo è un campo obbligatorio',
+                        'title.max'=>'il numero di caratteri consentito è di :max caratteri',
+                        'title.min'=>'il numero minimo di caratteri è di :min caratteri',
+                        'price.required'=>'il prezzo è un campo obbligatorio',
+                        'price.min'=>'il numero minimo di caratteri è di :min caratteri'
+                        ]
+        ];
+
     }
 }

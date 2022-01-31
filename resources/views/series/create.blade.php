@@ -3,22 +3,39 @@
 @section('content')
 <div class="container">
   
- 
   
-
+  
   <div class="row">
     <div class="col-6 offset-3">
+      @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+          <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{  $error }}</li>
+              @endforeach
+          </ul>
+        </div>
+      @endif
       <h1>Nuova serie</h1>
       <form action="{{route('series.store')}}" method="POST">
         @csrf
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Titolo</label>
-          <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+          <input 
+            type="text"  
+            class="form-control @error('title') is-invalid  @enderror" 
+            name="title" 
+            id="title" 
+            aria-describedby="emailHelp"
+           >
+
           @error('title')
             <p class="form_errors">
               {{$message}}
             </p>
           @enderror
+
+
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">immagine</label>
@@ -34,7 +51,10 @@
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Prezzo</label>
-          <input type="text" class="form-control" name="price" id="price">
+          <input type="text" class="form-control @error ('price') is-invalid @enderror" name="price" id="price">
+          @error('price') 
+            <p>{{$message}} </p>
+          @enderror  
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Data di uscita</label>
