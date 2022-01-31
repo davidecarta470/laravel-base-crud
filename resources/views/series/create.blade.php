@@ -3,15 +3,7 @@
 @section('content')
 <div class="container">
   
-  @if($errors->any()) 
-
-    <ul>
-       @foreach(($errors->any()) as $error)
-         <li>{{$error}}</li>
-       @endforeach
-  
-    </ul>
- @endif
+ 
   
 
   <div class="row">
@@ -22,6 +14,11 @@
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Titolo</label>
           <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+          @error('title')
+            <p class="form_errors">
+              {{$message}}
+            </p>
+          @enderror
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">immagine</label>
