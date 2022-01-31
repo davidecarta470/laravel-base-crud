@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PageController@index')->name('home');
 Route::get('/contacts', 'PageController@contacts')->name('contacts');
 Route::resource('series','SerieController');
+

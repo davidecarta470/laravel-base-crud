@@ -1,6 +1,15 @@
 @extends('layouts.main')
 @section('content')
+
 <div class="container">
+
+   @if(session('deleted'))
+   <div class="alert alert-danger" role="alert">
+      {{session('deleted')}}
+    </div>
+   @endif
+
+   
    <div class="" style="min-height:250px;">
       @foreach ( $series as $serie )
       <div class="row">
@@ -10,8 +19,15 @@
             </h2>
          </div>
          <div class="col-3 offset-1 ">
-            <button href=""class="btn btn-info">update</button>
-            <button href=""class="btn btn-danger">delete</button>
+
+           
+
+            <form style="display: inline-block" action="{{route('series.destroy',$serie)}}" method="POST">
+               @csrf
+               @method('DELETE')
+               <button type="submit" class="btn btn-danger">delete</button>
+
+            </form>
          </div>
       </div>   
       @endforeach

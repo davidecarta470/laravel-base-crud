@@ -3,18 +3,16 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-12"><h1>{{$item->title}}</h1></div>
-    <div class="col-3"><img style="" src="{{asset($item->img)}}" alt=""></div>
-
+    <div class="col-12"><h1>{{$series->title}}</h1></div>
+    <div class="col-3"><img style="width:100%" src="{{asset($series->img)}}" alt=""></div>
     
     <div class="col-6">
-      <h3 >{{$item->series}}</h3>
-      <p >{{$item->description}}</p>
-      <h3 >{{$item->price}}</h3>
+      <h3 >{{$series->series}}</h3>
+      <p >{{$series->description}}</p>
+      <h3 >{{$series->price}} euro</h3>
     </div>
     <div class="col-1">
-   
-      <button href=""class="btn btn-info mb-2"style="width:100%">update</button>
+      <a href="{{ route('series.edit', $series) }}" class="btn btn-primary">EDIT</a>
       <button href=""class="btn btn-danger"style="width:100%">delete</button>
     </div>
   </div>

@@ -14,8 +14,9 @@ class SerieController extends Controller
      */
     public function index()
     {
-        $series = Serie::paginate(5);
+        $series = Serie::orderBy('id','desc')->paginate(5);
         return view('series.index',compact('series'));
+        
     }
 
     /**
@@ -36,10 +37,20 @@ class SerieController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'=>"required|max:200|min:2",
+
+        ],
+        [
+            'title.required'=>'il titolo è un campo obbligatorio',
+            'title.max'=>'il numero di caratteri consentito è di :max caratteri',
+            'title.min'=>'il numero minimo di caratteri è di :min caratteru '
+        ]
+    );
         $data = $request->all();
         $new_serie = new Serie();
         // $new_serie->title = $data['title'];
-        // $new_serie->img = $data['thumb'];
+        // $new_serie->img = $data['img'];
         // $new_serie->description = $data['description'];
         // $new_serie->price = $data['price'];
         // $new_serie->series = $data['series'];
@@ -48,7 +59,7 @@ class SerieController extends Controller
         // $new_serie->save();
         $new_serie->fill($data);
         $new_serie->save();
-        return redirect('series.index',$new_serie);
+        return redirect()->route('series.index',$new_serie);
     }
 
     /**
@@ -59,8 +70,8 @@ class SerieController extends Controller
      */
     public function show(Serie $series)
     {
-       $item = Serie::find($series->id);
-       return view('series.show',compact('item'));
+      //si utilizza la dependency injection dei parametri
+       return view('series.show', compact('series'));
     }
 
     /**
@@ -69,9 +80,10 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Serie $serie)
+    public function edit(Serie $series)
     {
-        //
+        
+      return view('series.edit',compact('series'));
     }
 
     /**
@@ -81,9 +93,11 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Serie $serie)
+    public function update(Request $request, Serie $series)
     {
-        //
+        $data = $request->all();
+        $series->update($data);
+        return redirect()->route('series.index');
     }
 
     /**
@@ -92,8 +106,9 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Serie $serie)
+    public function destroy(Serie $series)
     {
-        //
+        $series->delete();
+        return redirect()->route('series.index')->with('deleted',"il fumetto $series->title è stato eliminato");
     }
 }
